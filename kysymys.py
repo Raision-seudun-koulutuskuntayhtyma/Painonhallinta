@@ -49,7 +49,6 @@ def kysy_liukuluku(kysymys, alaraja, ylaraja):
 
     return luku
 
-# TODO: Tähän funktio, jolla tarkistetaan, että syöte on tekstiä
 
 # Koodauksen aikaiset tilapaistestit
 if __name__ == '__main__':
