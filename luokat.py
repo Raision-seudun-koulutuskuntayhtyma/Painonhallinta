@@ -34,11 +34,17 @@ class Aikuinen(Henkilo):
         self.tavoitepaino = tavoitepaino
 
     def rasvaprosentti(self):
-        
         rasvaprosentti = 1.2 * self.painoindeksi() + 0.23 * self.ika - 10.8 * self.sukupuoli - 5.4
         return rasvaprosentti
-
-
+# Tehtävä 1
+class Lapsi(Henkilo):
+    """Henkilöluokan aliluokka lapsille."""
+    def __init__(self, etunimi, sukunimi, pituus, paino, ika, sukupuoli):
+        super().__init__(etunimi, sukunimi, pituus, paino, ika, sukupuoli)
+        
+    def rasvaprosentti(self):
+        rasvaprosentti = 1.51 * self.painoindeksi() - 0.70 * self.ika - 3.6 * self.sukupuoli + 1.4
+        return rasvaprosentti    
 
 
 if __name__ == "__main__":
