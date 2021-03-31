@@ -4,16 +4,16 @@
 import csv
 
 # Luodaan otsikot CSV-tiedostoon
-def luo_otskot(tiedosto):
+def luo_otsikot(tiedosto):
 # Määritellään csv-tiedosto, erotin ja tekstitunniste    
-    with open(tiedosto, mode='w') as datatiedosto:
-        csv_kirjoittaja = csv.writer(datatiedosto, dialect='excel', delimiter=';', quotechar='"')
+    with open(tiedosto, 'w') as datatiedosto:
+        csv_kirjoittaja = csv.writer(datatiedosto, dialect = 'excel', delimiter = ';', quotechar = '"')
         csv_kirjoittaja.writerow(['Etunimi', 'Sukunimi', 'Pituus', 'Paino', 'Ikä', 'Sukupuoli', 'Tavoitepaino'])
 
 # Lisätään rivejä CSV-tiedostoon
 def lisaa_tiedot(tiedosto, etunimi, sukunimi, pituus, paino, ika, sukupuoli, tavoitepaino):
-    with open(tiedosto, mode='a') as datatiedosto:
-        csv_kirjoittaja = csv.writer(datatiedosto, dialect='excel', delimiter=';', quotechar='"')
+    with open(tiedosto, 'a') as datatiedosto:
+        csv_kirjoittaja = csv.writer(datatiedosto, dialect = 'excel', delimiter = ';', quotechar = '"')
         csv_kirjoittaja.writerow([etunimi, sukunimi, pituus, paino, ika, sukupuoli, tavoitepaino])
     
 
