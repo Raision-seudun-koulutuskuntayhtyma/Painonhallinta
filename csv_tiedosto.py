@@ -10,7 +10,7 @@ def luo_otsikot(tiedosto):
     Args:
         tiedosto (string): muokattavan tiedoston nimi
     """
-# Määritellään csv-tiedosto, erotin, tekstitunniste     
+# Määritellään csv-tiedosto, erotin, tekstitunniste ja rivinvaihtomääritys    
     with open(tiedosto, 'w', newline = '') as datatiedosto: # newline = '' estää tyhjien rivien syntymisen
         csv_kirjoittaja = csv.writer(datatiedosto, delimiter = ';', quotechar = '"', )
         csv_kirjoittaja.writerow(['Etunimi', 'Sukunimi', 'Pituus', 'Paino', 'Ikä', 'Sukupuoli', 'Tavoitepaino'])
