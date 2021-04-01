@@ -10,10 +10,9 @@ def luo_otsikot(tiedosto):
     Args:
         tiedosto (string): muokattavan tiedoston nimi
     """
-# FIXME: Tuottaa tyhjiä rivejä korjattava viikonlopun aikana.
-# Määritellään csv-tiedosto, erotin ja tekstitunniste    
-    with open(tiedosto, 'w') as datatiedosto:
-        csv_kirjoittaja = csv.writer(datatiedosto, delimiter = ';', quotechar = '"')
+# Määritellään csv-tiedosto, erotin ja tekstitunniste ja uuden rivin tunniste tyhjäksi, jolloin ei synny ylimääräisiä rivejä    
+    with open(tiedosto, 'w', newline = '') as datatiedosto:
+        csv_kirjoittaja = csv.writer(datatiedosto, delimiter = ';', quotechar = '"', )
         csv_kirjoittaja.writerow(['Etunimi', 'Sukunimi', 'Pituus', 'Paino', 'Ikä', 'Sukupuoli', 'Tavoitepaino'])
 
 # Lisätään rivejä CSV-tiedostoon
@@ -30,7 +29,7 @@ def lisaa_tiedot(tiedosto, etunimi, sukunimi, pituus, paino, ika, sukupuoli, tav
         sukupuoli (string): Mies 1, nainen 0
         tavoitepaino (string): Tavoitteena oleva paino (kg)
     """
-    with open(tiedosto, 'a') as datatiedosto:
+    with open(tiedosto, 'a', newline = '') as datatiedosto: # Huom. tyhjien rivien esto newline = ''
         csv_kirjoittaja = csv.writer(datatiedosto, delimiter = ';', quotechar = '"')
         csv_kirjoittaja.writerow([etunimi, sukunimi, pituus, paino, ika, sukupuoli, tavoitepaino])
     
@@ -51,30 +50,33 @@ def lue_rivit(tiedosto):
             lista.append(rivi) # Lisätään rivi listaan
     return lista
 
-# BUG: Luetaan CSV-tiedosto avain-arvo-pareiksi
+# Luetaan CSV-tiedosto avain-arvo-pareiksi listaan
 def lue_sanakirjaan(tiedosto):
+    sanakirja = [] # Lista riveistä avain-arvo-pareina
     with open(tiedosto, 'r') as datatiedosto:
-        csv_lukija = csv.DictReader(datatiedosto)
+        csv_lukija = csv.DictReader(datatiedosto, delimiter = ';', quotechar = '"')
         for rivi in csv_lukija:
-            print(rivi['Etunimi'], rivi['Paino']) # Lisätään rivi listaan
-    
+            sanakirja.append(rivi)
+    return sanakirja
 
 
 if __name__ == "__main__":
+    # Luodaan otsikot
+    luo_otsikot('bmidata.csv')
 
-    """ # Lisätään testimielessä rivejä
+    # Lisätään testimielessä rivejä
     lisaa_tiedot('bmidata.csv', 'Mika', 'Vainio', '171', '72', '59','1', '70')
-    lisaa_tiedot('bmidata.csv', 'Mikko', 'Viljanen', '176', '80', '50','1', '75') """
+    lisaa_tiedot('bmidata.csv', 'Mikko', 'Viljanen', '176', '80', '50','1', '75')
 
-    """ # Luetaan tiedot
+    # Luetaan tiedot
     with open('bmidata.csv', 'r') as testiluku:
         print(testiluku.read())
 
      # Luetaan tiedot listaan ja käydään se riveittäin läpi
-    print(lue_rivit('bmidata.csv')) """
+    print(lue_rivit('bmidata.csv'))
 
     # Luetaan sanakirjaa
-    lue_sanakirjaan('bmidata.csv')
+    print(lue_sanakirjaan('bmidata.csv'))
     
         
     
