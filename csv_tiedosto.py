@@ -10,8 +10,8 @@ def luo_otsikot(tiedosto):
     Args:
         tiedosto (string): muokattavan tiedoston nimi
     """
-# Määritellään csv-tiedosto, erotin ja tekstitunniste ja uuden rivin tunniste tyhjäksi, jolloin ei synny ylimääräisiä rivejä    
-    with open(tiedosto, 'w', newline = '') as datatiedosto:
+# Määritellään csv-tiedosto, erotin, tekstitunniste     
+    with open(tiedosto, 'w', newline = '') as datatiedosto: # newline = '' estää tyhjien rivien syntymisen
         csv_kirjoittaja = csv.writer(datatiedosto, delimiter = ';', quotechar = '"', )
         csv_kirjoittaja.writerow(['Etunimi', 'Sukunimi', 'Pituus', 'Paino', 'Ikä', 'Sukupuoli', 'Tavoitepaino'])
 
@@ -61,7 +61,7 @@ def lue_sanakirjaan(tiedosto):
 
 
 if __name__ == "__main__":
-    # Luodaan otsikot
+    # Luodaan otsikot (kommentoi ensimmäisen käytön jälkeen)
     luo_otsikot('bmidata.csv')
 
     # Lisätään testimielessä rivejä
@@ -75,7 +75,7 @@ if __name__ == "__main__":
      # Luetaan tiedot listaan ja käydään se riveittäin läpi
     print(lue_rivit('bmidata.csv'))
 
-    # Luetaan sanakirjaa
+    # Luetaan tiedot sanakirjaan ja käydään se riveittäin läpi
     print(lue_sanakirjaan('bmidata.csv'))
     
         
