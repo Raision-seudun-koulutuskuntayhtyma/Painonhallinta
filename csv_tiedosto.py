@@ -3,6 +3,15 @@
 # Kirjastojen ja modulien lataukset
 import csv
 
+# Luodaan oma CSV-määritys (murre, dialect) suomalaiselle Excelille
+csv.register_dialect('fi_excel', delimiter = ';', quotechar = '"')
+
+# Käytetään omaa CSV-määritystä 
+def luo_otsikot_fi(tiedosto):
+    with open(tiedosto, 'w', newline = '') as fi_tiedosto:
+        csv_otsikoija = csv.writer(fi_tiedosto, dialect = 'fi_excel')
+        csv_otsikoija.writerow(['Etunimi', 'Sukunimi', 'Palkka'])
+
 # Luodaan otsikot CSV-tiedostoon
 def luo_otsikot(tiedosto):
     """Luodaan CSV-tiedostoon tarvittavat sarakeotsikot
@@ -78,5 +87,9 @@ if __name__ == "__main__":
     # Luetaan tiedot sanakirjaan ja käydään se riveittäin läpi
     print(lue_sanakirjaan('bmidata.csv'))
     
-        
+    # Suomalaisten asetusten testaus
+    luo_otsikot_fi('suomalainen.csv')
+
+    with open('suomalainen.csv', 'r') as testiluku:
+        print(testiluku.read())   
     
