@@ -46,12 +46,29 @@ def luo_taulut(tiedosto):
 
 # Luodaan testidataa
 def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
-    # Rakennetaan SQL-lause argumenttien arvoista
-    sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + sukupuoli + ", " + "'" + spaiva + ");"
+    """Lisätään argumenttina annetun tietokannan henkilo-tauluun uusi tietue
 
+    Args:
+        tiedosto (string): tietokantatiedoston nimi
+        etunimi (string): Henkilön etunimi
+        sukunimi (string): Henkilön sukunimi
+        sukupuoli (int): Sukupuolikoodi 1: mies 0: nainen
+        spaiva (string): ISO-standardin mukainen päiväys YYYY-MM-DD
+    """
+    # Rakennetaan SQL-lause argumenttien arvoista
+    sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + str(sukupuoli) + ", " + "'" + spaiva + "');"
+
+    # Luodaan yhteys tietokantaan
     yhteys = sqlite3.connect(tiedosto)
 
-    yhteys.execute()
+    # Suoritetaan tietueen lisäys SQL-lauseena
+    yhteys.execute(sql_lause)
+
+    # Vahvistetaan tapahtuma (transaktio)
+    yhteys.commit()
+
+    # Suljetaan yheys
+    yhteys.close()
 
     
 
@@ -65,4 +82,7 @@ if __name__ == "__main__":
     sukunimi = 'Viljanen'
     sukupuoli = 1
     spaiva = '1968-12-03'
-    sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + sukupuoli + ", " + "'" + spaiva + "');"
+    sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + str(sukupuoli) + ", " + "'" + spaiva + "');"
+    print(sql_lause)
+
+    lisaa_henkilo(tietokannan_nimi, 'Mikko', 'Viljanen', 1, '1968-12-03')
