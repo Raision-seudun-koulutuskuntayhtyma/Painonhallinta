@@ -24,7 +24,7 @@ def luo_taulut(tiedosto):
 
     # Luodaan Henkilö-taulu
     yhteys.execute('''CREATE TABLE henkilo
-        (henkilo_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+        (henkilo_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         etunimi TEXT NOT NULL,
         sukunimi TEXT NOT NULL,
         sukupuoli INTEGER NOT NULL,
@@ -45,10 +45,13 @@ def luo_taulut(tiedosto):
     yhteys.close()
 
 # Luodaan testidataa
-def lisaa_henkilo(tiedosto, etunimi, sukunimi, spaiva, sukupuoli):
+def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
+    # Rakennetaan SQL-lause argumenttien arvoista
+    sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + sukupuoli + ", " + "'" + spaiva + ");"
+
     yhteys = sqlite3.connect(tiedosto)
 
-    yhteys.execute(" INSERT INTO henkilo (etunimi, sukunimi, spaiva, sukupuoli) VALUES ( etunimi, sukunimi)")
+    yhteys.execute()
 
     
 
@@ -56,5 +59,10 @@ def lisaa_henkilo(tiedosto, etunimi, sukunimi, spaiva, sukupuoli):
 
 # Paikallinen tetaus
 if __name__ == "__main__":
-    luo_tietokanta(tietokannan_nimi)
-    luo_taulut(tietokannan_nimi)
+    # luo_tietokanta(tietokannan_nimi)
+    # luo_taulut(tietokannan_nimi)
+    etunimi = 'Mikko'
+    sukunimi = 'Viljanen'
+    sukupuoli = 1
+    spaiva = '1968-12-03'
+    sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + sukupuoli + ", " + "'" + spaiva + "');"
