@@ -4,7 +4,7 @@
 import sqlite3
 
 # Luodaan uusi tietokanta projektin hakemistoon
-tietokanta = 'painonhallinta.db'
+tietokannan_nimi = 'painonhallinta.db'
 
 def luo_tietokanta(tiedosto):
     """Luo tietokannan huom. tiedoston tyyppi po. .db
@@ -15,11 +15,11 @@ def luo_tietokanta(tiedosto):
     yhteys = sqlite3.connect(tiedosto)
     yhteys.close()
 
-def luo_taulut():
+def luo_taulut(tiedosto):
     """Luo SQL Lite tietokantaan tarvittavat taulut
     """
     # Muodostetaan yhteys tietokantaan, luodaan kanta tarvittaessa
-    yhteys = sqlite3.connect(tietokanta)
+    yhteys = sqlite3.connect(tiedosto)
 
     # Luodaan Henkilö-taulu
     yhteys.execute('''CREATE TABLE henkilo
@@ -46,5 +46,5 @@ def luo_taulut():
 
 # Paikallinen tetaus
 if __name__ == "__main__":
-    luo_tietokanta(tietokanta)
-    luo_taulut()
+    luo_tietokanta(tietokannan_nimi)
+    luo_taulut(tietokannan_nimi)
