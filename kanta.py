@@ -2,6 +2,7 @@
 
 # Modulien ja kirjastojen lataukset
 import sqlite3
+from sqlite3.dbapi2 import SQLITE_INSERT
 
 # Luodaan uusi tietokanta projektin hakemistoon
 tietokannan_nimi = 'painonhallinta.db'
@@ -23,7 +24,7 @@ def luo_taulut(tiedosto):
 
     # Luodaan Henkilö-taulu
     yhteys.execute('''CREATE TABLE henkilo
-        (henkilo_id INTEGER PRIMARY KEY NOT NULL,
+        (henkilo_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
         etunimi TEXT NOT NULL,
         sukunimi TEXT NOT NULL,
         sukupuoli INTEGER NOT NULL,
@@ -31,16 +32,25 @@ def luo_taulut(tiedosto):
 
     # Luodaan Mittaukset-taulu
     yhteys.execute('''CREATE TABLE mittaus 
-        (mittaus_id INTEGER PRIMARY KEY NOT NULL,
+        (mittaus_id INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
         henkilo_id INTEGER NOT NULL,
         pituus REAL NOT NULL,
-        paino REAL NOT NULL);''')
+        paino REAL NOT NULL,
+        FOREIGN KEY (henkilo_id)
+            REFERENCES henkilo (henkilo_id)
+            ON DELETE CASCADE);''')
+            
     
     # Suljetaan tietokantayhteys taulujen luonnin jälkeen
     yhteys.close()
 
 # Luodaan testidataa
-# TODO: luo rutiinit henkilön ja mittauksen tietojen syöttämiseen
+def lisaa_henkilo(tiedosto, etunimi, sukunimi, spaiva, sukupuoli):
+    yhteys = sqlite3.connect(tiedosto)
+
+    yhteys.execute(" INSERT INTO henkilo (etunimi, sukunimi, spaiva, sukupuoli) VALUES ( etunimi, sukunimi)")
+
+    
 
 # TODO: luo rutiini tietojen lukemiseksi molemmista tauluita
 
