@@ -4,6 +4,8 @@
 import sqlite3
 
 # Luodaan uusi tietokanta projektin hakemistoon
+tietokanta = 'painonhallinta.db'
+
 def luo_tietokanta(tiedosto):
     """Luo tietokannan huom. tiedoston tyyppi po. .db
 
@@ -17,13 +19,23 @@ def luo_taulut():
     """Luo SQL Lite tietokantaan tarvittavat taulut
     """
     # Muodostetaan yhteys tietokantaan, luodaan kanta tarvittaessa
-    yhteys = sqlite3.connect('painohallinta.db')
+    yhteys = sqlite3.connect(tietokanta)
 
     # Luodaan Henkilö-taulu
-    yhteys.execute('''CREATE TABLE henkilo (henkilo_id INTEGER PRIMARY KEY NOT NULL, etunimi TEXT NOT NULL, sukunimi TEXT NOT NULL, sukupuoli INTEGER NOT NULL, spaiva DATE NOT NULL)''')
+    yhteys.execute('''CREATE TABLE henkilo
+        (henkilo_id INTEGER PRIMARY KEY NOT NULL,
+        etunimi TEXT NOT NULL,
+        sukunimi TEXT NOT NULL,
+        sukupuoli INTEGER NOT NULL,
+        spaiva DATE NOT NULL);''')
 
     # Luodaan Mittaukset-taulu
-    yhteys.execute('''CREATE TABLE mittaus (mittaus_id INTEGER PRIMARY KEY NOT NULL, henkilo_id INTEGER NOT NULL, pituus REAL NOT NULL, paino REAL NOT NULL)''')
+    yhteys.execute('''CREATE TABLE mittaus 
+        (mittaus_id INTEGER PRIMARY KEY NOT NULL,
+        henkilo_id INTEGER NOT NULL,
+        pituus REAL NOT NULL,
+        paino REAL NOT NULL);''')
+    
     # Suljetaan tietokantayhteys taulujen luonnin jälkeen
     yhteys.close()
 
@@ -34,5 +46,5 @@ def luo_taulut():
 
 # Paikallinen tetaus
 if __name__ == "__main__":
-    pass
-    # luo_taulut()
+    luo_tietokanta(tietokanta)
+    luo_taulut()
