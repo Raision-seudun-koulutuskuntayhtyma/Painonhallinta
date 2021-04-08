@@ -74,7 +74,7 @@ def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
 
 # TODO: luo rutiini tietojen lukemiseksi molemmista tauluita
 
-# Paikallinen tetaus
+# Paikallinen testaus
 if __name__ == "__main__":
     # luo_tietokanta(tietokannan_nimi)
     # luo_taulut(tietokannan_nimi)
