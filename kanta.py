@@ -70,12 +70,12 @@ def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
     # Suljetaan yheys
     yhteys.close()
 
-# TODO: luo funktio, jolla saadaan puolilainausmerkit merkkijonon ympärille
+# Funktio, jolla saadaan puolilainausmerkit merkkijonon ympärille
 def sql_string(kentta):
     kentta = "'" + kentta +"'"
     return kentta
 
-# TODO: luo rutiini mittaustietojen syöttämiseksi mittaukset tauluun
+# Rutiini mittaustietojen syöttämiseksi mittaukset tauluun
 def lisaa_mittaus(tiedosto, henkilo_id, pituus, paino):
     """Lisää henkilön mittaustiedot mittaus-tauluuun
 
@@ -97,12 +97,38 @@ def lisaa_mittaus(tiedosto, henkilo_id, pituus, paino):
 
     # Suljetaan yheys
     yhteys.close()
+
 # TODO: luo rutiini tietojen lukemiseksi molemmista tauluita
+def lue_kaikki(tiedosto, taulu):
+    """[summary]
+
+    Args:
+        tiedosto (string): tietokantatiedoston nimi
+        taulu (string): taulun nimi
+
+    Returns:
+        list: tulosjoukon tietueet
+    """
+    lista = []
+    sql_lause = "SELECT * FROM " + taulu + ";"
+
+     # Luodaan yhteys tietokantaan
+    yhteys = sqlite3.connect(tiedosto)
+
+    # Suoritetaan tietueen lisäys SQL-lauseena
+    tulosjoukko = yhteys.execute(sql_lause)
+    for rivi in tulosjoukko:
+        lista.append(rivi)
+    
+    # Suljetaan yheys
+    yhteys.close()
+
+    return lista   
 
 # Paikallinen testaus
 if __name__ == "__main__":
-    luo_tietokanta(tietokannan_nimi)
-    luo_taulut(tietokannan_nimi)
+    # luo_tietokanta(tietokannan_nimi)
+    # luo_taulut(tietokannan_nimi)
 
     '''
     etunimi = 'Mikko'
@@ -112,8 +138,8 @@ if __name__ == "__main__":
     sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + str(sukupuoli) + ", " + "'" + spaiva + "');"
     print(sql_lause) '''
 
-    lisaa_henkilo(tietokannan_nimi, 'Mikko', 'Viljanen', 1, '1968-12-03')
-    lisaa_henkilo(tietokannan_nimi, 'Mika', 'Vainio', 1, '1962-06-26')
+    # lisaa_henkilo(tietokannan_nimi, 'Mikko', 'Viljanen', 1, '1968-12-03')
+    # lisaa_henkilo(tietokannan_nimi, 'Mika', 'Vainio', 1, '1962-06-26')
 
     '''
     henkilo_id = 1
@@ -122,4 +148,10 @@ if __name__ == "__main__":
     sql_lause = "INSERT INTO mittaus (henkilo_id, pituus, paino) VALUES (" + str(henkilo_id) + "," + str(pituus) + "," + str(paino) + ");"
     print(sql_lause) '''
 
-    lisaa_mittaus(tietokannan_nimi, 2, 171, 74)
+    # lisaa_mittaus(tietokannan_nimi, 2, 171, 74)
+
+    tulosjoukko = lue_kaikki(tietokannan_nimi, 'henkilo')
+    print(tulosjoukko)
+    # BUG: ei löydä näkymää, selvitä, mikä mättää
+    tulosjoukko2 = lue_kaikki(tietokannan_nimi, 'henkilon_mittaukset')
+    print(tulosjoukko2)
