@@ -70,19 +70,56 @@ def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
     # Suljetaan yheys
     yhteys.close()
 
-    
+# TODO: luo funktio, jolla saadaan puolilainausmerkit merkkijonon ympärille
+def sql_string(kentta):
+    kentta = "'" + kentta +"'"
+    return kentta
 
+# TODO: luo rutiini mittaustietojen syöttämiseksi mittaukset tauluun
+def lisaa_mittaus(tiedosto, henkilo_id, pituus, paino):
+    """Lisää henkilön mittaustiedot mittaus-tauluuun
+
+    Args:
+        henkilo_id (integer): henkiön id
+        pituus (float): henkilön pituus sentteinä
+        paino (float): henkilön paino kiloina
+    """
+    sql_lause = "INSERT INTO mittaus (henkilo_id, pituus, paino) VALUES (" + str(henkilo_id) + "," + str(pituus) + "," + str(paino) + ");"
+
+     # Luodaan yhteys tietokantaan
+    yhteys = sqlite3.connect(tiedosto)
+
+    # Suoritetaan tietueen lisäys SQL-lauseena
+    yhteys.execute(sql_lause)
+
+    # Vahvistetaan tapahtuma (transaktio)
+    yhteys.commit()
+
+    # Suljetaan yheys
+    yhteys.close()
 # TODO: luo rutiini tietojen lukemiseksi molemmista tauluita
 
 # Paikallinen testaus
 if __name__ == "__main__":
-    # luo_tietokanta(tietokannan_nimi)
-    # luo_taulut(tietokannan_nimi)
+    luo_tietokanta(tietokannan_nimi)
+    luo_taulut(tietokannan_nimi)
+
+    '''
     etunimi = 'Mikko'
     sukunimi = 'Viljanen'
     sukupuoli = 1
     spaiva = '1968-12-03'
     sql_lause = "INSERT INTO henkilo (etunimi, sukunimi, sukupuoli, spaiva) VALUES (" + "'" + etunimi + "', " + "'" + sukunimi + "', " + str(sukupuoli) + ", " + "'" + spaiva + "');"
-    print(sql_lause)
+    print(sql_lause) '''
 
     lisaa_henkilo(tietokannan_nimi, 'Mikko', 'Viljanen', 1, '1968-12-03')
+    lisaa_henkilo(tietokannan_nimi, 'Mika', 'Vainio', 1, '1962-06-26')
+
+    '''
+    henkilo_id = 1
+    pituus = 171
+    paino = 74
+    sql_lause = "INSERT INTO mittaus (henkilo_id, pituus, paino) VALUES (" + str(henkilo_id) + "," + str(pituus) + "," + str(paino) + ");"
+    print(sql_lause) '''
+
+    lisaa_mittaus(tietokannan_nimi, 2, 171, 74)
