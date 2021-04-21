@@ -49,4 +49,5 @@ class Henkiloauto(Auto):
 if __name__ == "__main__":
     henkiloauto1 = Henkiloauto('CYF-67','Land-Rover','Discovery 3 HS',2008, 368210, 'diesel', 'automaatti', 'vihreä', 270, 7, 5, 'tila-auto', 300,['vakionopeuden säädin', 'peruutuskamera'])
     print('Rekisterinumero:', henkiloauto1.rek, 'istumapaikkoja:', henkiloauto1.istuimet)
-    
+
+# TODO: Lasketaan jäljelläolevien kilometrien hinta 

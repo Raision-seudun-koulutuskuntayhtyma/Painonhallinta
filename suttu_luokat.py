@@ -2,7 +2,7 @@
 
 # Luokka lintujen tietojen tallennukseen 
 
-from typing_extensions import runtime_checkable
+
 
 
 class Lintu:
@@ -57,4 +57,3 @@ class Auto():
         self.vari = vari
         self.paastot = paastot
 
-        

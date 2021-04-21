@@ -152,6 +152,6 @@ if __name__ == "__main__":
 
     tulosjoukko = lue_kaikki(tietokannan_nimi, 'henkilo')
     print(tulosjoukko)
-    # BUG: ei löydä näkymää, selvitä, mikä mättää
+    # Näkymän testaus: näkymä tehty GUI:ssa, muista tallentaa ja sulkea ennen testaamista!
     tulosjoukko2 = lue_kaikki(tietokannan_nimi, 'henkilon_mittaukset')
     print(tulosjoukko2)
