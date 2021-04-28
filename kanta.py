@@ -30,7 +30,7 @@ def luo_taulut(tiedosto):
         sukupuoli INTEGER NOT NULL,
         spaiva DATE NOT NULL);''')
 
-    # Luodaan Mittaukset-taulu
+    # Luodaan Mittaukset-taulu, mittaus_id on laskuri
     yhteys.execute('''CREATE TABLE mittaus 
         (mittaus_id INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
         henkilo_id INTEGER NOT NULL,
@@ -75,7 +75,7 @@ def sql_string(kentta):
     kentta = "'" + kentta +"'"
     return kentta
 
-# Rutiini mittaustietojen syöttämiseksi mittaukset tauluun
+# Rutiini mittaustietojen syöttämiseksi mittaukset tauluun, huom. mittaus_id laskuri
 def lisaa_mittaus(tiedosto, henkilo_id, pituus, paino):
     """Lisää henkilön mittaustiedot mittaus-tauluuun
 
