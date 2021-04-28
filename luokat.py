@@ -8,7 +8,7 @@
 class Henkilo:
     """Yliluokka kaikille henkilötyypeille"""
     def __init__(self, etunimi, sukunimi, pituus, paino, ika, sukupuoli):
-        
+        # Kenttien / ominaisuuksien asetukset
         self.etunimi = etunimi
         self.sukunimi = sukunimi
         self.pituus = pituus
@@ -16,10 +16,12 @@ class Henkilo:
         self.ika = ika
         self.sukupuoli = sukupuoli
 
+    # Metodi painoindeksin laskentaan olion painon ja pituuden perusteella, huom. self-argumentti
     def painoindeksi(self):
         bmi = self.paino / (self.pituus / 100) ** 2
         return bmi
 
+    # Vaihtoehtona staattinen metodi, jolla painoindeksi lasketaan suoraan luokasta, huon. ei self-argumenttia
     @staticmethod
     def bmi(pituus, paino):
         bmi = paino / (pituus/100)**2
