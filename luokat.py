@@ -27,6 +27,7 @@ class Henkilo:
         bmi = paino / (pituus/100)**2
         return bmi
 
+# Aliluokka aikuiselle henkilölle, perii Henkilö-luokan
 class Aikuinen(Henkilo):
     """Aliluokka aikuiselle henkilölle, perii Henkilo-luokan ominaisuudet
     ja metodit
@@ -38,7 +39,7 @@ class Aikuinen(Henkilo):
     def rasvaprosentti(self):
         rasvaprosentti = 1.2 * self.painoindeksi() + 0.23 * self.ika - 10.8 * self.sukupuoli - 5.4
         return rasvaprosentti
-# Tehtävä 1
+# Aliluokka lapselle, perii Henkilö-luokan 
 class Lapsi(Henkilo):
     """Henkilöluokan aliluokka lapsille."""
     def __init__(self, etunimi, sukunimi, pituus, paino, ika, sukupuoli):
@@ -48,7 +49,7 @@ class Lapsi(Henkilo):
         rasvaprosentti = 1.51 * self.painoindeksi() - 0.70 * self.ika - 3.6 * self.sukupuoli + 1.4
         return rasvaprosentti    
 
-
+# Tässä tiedostossa tehtävät testit
 if __name__ == "__main__":
     mikaV = Henkilo('Mika', 'Vainio', 171, 74, 59, 1)
     print('Henkilö painaa', mikaV.paino)
