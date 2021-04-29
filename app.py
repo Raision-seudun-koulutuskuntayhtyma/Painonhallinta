@@ -19,7 +19,7 @@ while True:
         sukupuoli = kysymys.kysy_liukuluku('Sukupuoli nainen 0, mies 1: ', 0, 1)
         syntyma_aika = input('Syntymäaika (VVVV-KK-PP): ') 
         lisaa_henkiloita = input('Lisätäänkö uusia henkilöitä? K/e')
-        if lisaa_henkiloita.upper == 'E':
+        if lisaa_henkiloita.upper() == 'E':
             break
         else:
             lisaa_henkiloita = 'K'
