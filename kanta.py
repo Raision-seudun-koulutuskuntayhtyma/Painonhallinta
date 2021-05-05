@@ -44,7 +44,7 @@ def luo_taulut(tiedosto):
     # Suljetaan tietokantayhteys taulujen luonnin jälkeen
     yhteys.close()
 
-# Luodaan testidataa
+# Henkilötietojen lisääminen Henkilö-tauluun
 def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
     """Lisätään argumenttina annetun tietokannan henkilo-tauluun uusi tietue
 
@@ -64,7 +64,7 @@ def lisaa_henkilo(tiedosto, etunimi, sukunimi, sukupuoli, spaiva):
     # Suoritetaan tietueen lisäys SQL-lauseena
     yhteys.execute(sql_lause)
 
-    # Vahvistetaan tapahtuma (transaktio)
+    # Vahvistetaan tapahtuma (transaktio) -tarvitaan INSERT-, UPDATE- ja DELETE-komentoja käytettäessä
     yhteys.commit()
 
     # Suljetaan yheys
@@ -122,11 +122,11 @@ def lue_kaikki(tiedosto, taulu):
     
     # Suljetaan yhteys
     yhteys.close()
-
+    
+    # Palautetaan tulosjoukko 
     return lista   
 
 # Haetaan henkilön id:n perusteella hänen viimeisimmät tietonsa
-# Rutiini kaikkien tietojen lukemiseksi taulusta tai näkymästä
 def lue_viimeiset_tiedot(tiedosto, henkilo_id):
     """Luetaan henkilön tiedot näkymästä henkilon_viimeiset_tiedot
        käyttämällä ehtonan henkilo_id-mumeroa
@@ -152,7 +152,8 @@ def lue_viimeiset_tiedot(tiedosto, henkilo_id):
     
     # Suljetaan yhteys
     yhteys.close()
-
+    
+    # Palautetaan tulosjoukko
     return lista   
 # Paikallinen testaus
 if __name__ == "__main__":
