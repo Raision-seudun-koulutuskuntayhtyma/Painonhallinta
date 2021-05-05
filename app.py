@@ -12,7 +12,7 @@ tiedosto = 'painonhallinta.db' # Tietokantatiedoston määrittely
 while True:
     
     # Silmukka henkilötietojen kyselemiseen
-    lisaa_henkiloita = input('Lisätäänkö uusia henkilöitä? K/e')
+    lisaa_henkiloita = input('Lisätäänkö uusia henkilöitä? K/e ')
     if lisaa_henkiloita.upper() != 'E':
         lisaa_henkiloita = 'K'
 
@@ -30,7 +30,7 @@ while True:
         except:
             print('Tietokantaan tallennuksessa tapahtui virhe')
         
-        lisaa_henkiloita = input('Lisätäänkö uusia henkilöitä? K/e')
+        lisaa_henkiloita = input('Lisätäänkö uusia henkilöitä? K/e ')
         if lisaa_henkiloita.upper() == 'E':
             break
         else:
@@ -38,7 +38,7 @@ while True:
                
 
     # Silmukka mittaustietojen kyselemiseen
-    lisaa_mittauksia = input('Lisätäänkö uusia mittaustuloksia? k/E')
+    lisaa_mittauksia = input('Lisätäänkö uusia mittaustuloksia? K/e ')
     while lisaa_mittauksia.upper() == 'K':
         henkilo_id = input('Anna henkilön id: ')
         pituus = kysymys.kysy_liukuluku('Pituus (cm): ', 100, 250)
@@ -50,14 +50,14 @@ while True:
         except:
             print('Tietokantaan tallennuksessa tapahtui virhe')
 
-        lisaa_mittauksia = input('Lisätäänkö uusia mittaustuloksia? K/e')
+        lisaa_mittauksia = input('Lisätäänkö uusia mittaustuloksia? K/e ')
         if lisaa_mittauksia.upper() == 'E':
             break
         else:
             lisaa_mittauksia = 'K'
 
     # Silmukka olioiden luomiseen ja tulosten näyttämiseen
-    lisaa_tuloksia = input('Lasketaanko uusia tuloksia? k/E')
+    lisaa_tuloksia = input('Lasketaanko uusia tuloksia? K/e')
     while lisaa_tuloksia.upper() == 'K':
         henkilo_id = input('Anna henkilön id: ')
         # Haetaan henkilö- ja mittaustietodot tietokannan henkilon_viimeiset_tiedot-näkymästä
@@ -69,12 +69,12 @@ while True:
             tapahtui_virhe = True
 
         if tapahtui_virhe == False:  
-            etunimi = tietue[1]
-            sukunimi = tietue[2]
-            sukupuoli = tietue[3]
-            pituus = tietue[4]
-            paino =  tietue[5]
-            ika = round(tietue[6])
+            etunimi = tietue[0][1]
+            sukunimi = tietue[0][2]
+            sukupuoli = tietue[0][3]
+            pituus = tietue[0][4]
+            paino =  tietue[0][5]
+            ika = round(tietue[0][6])
         if ika < 18:
             lapsi = luokat.Lapsi(etunimi, sukunimi, pituus, paino, ika, sukupuoli)
             print('Painoindenksi on:', lapsi.painoindeksi())
@@ -86,7 +86,7 @@ while True:
             print('Kehon rasvaprosentti on:', aikuinen.rasvaprosentti())
 
 
-        lisaa_tuloksia = input('Lasketaanko uusia tuloksia? K/e')
+        lisaa_tuloksia = input('Lasketaanko uusia tuloksia? K/e ')
         if lisaa_tuloksia.upper() == 'E':
             break
         else:
