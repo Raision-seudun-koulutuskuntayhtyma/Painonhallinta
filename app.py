@@ -8,7 +8,7 @@ import luokat # Henkilö, Aikuinen ja Lapsi -luokkien määrittelyt
 # Määrittely ja alustukset
 tiedosto = 'painonhallinta.db' # Tietokantatiedoston määrittely
 
-# Varsinainen ohjema
+# Varsinainen ohjelma
 while True:
     
     # Silmukka henkilötietojen kyselemiseen
@@ -30,6 +30,7 @@ while True:
         except:
             print('Tietokantaan tallennuksessa tapahtui virhe')
         
+        # Kysytään halutaanko syöttää lisää henkilöitä
         lisaa_henkiloita = input('Lisätäänkö uusia henkilöitä? K/e ')
         if lisaa_henkiloita.upper() == 'E':
             break
@@ -44,12 +45,13 @@ while True:
         pituus = kysymys.kysy_liukuluku('Pituus (cm): ', 100, 250)
         paino = kysymys.kysy_liukuluku('Paino (kg): ', 30, 200)
         
-        # Lisätään mittaustulost tietokantaan
+        # Lisätään mittaustulos tietokantaan
         try:
             kanta.lisaa_mittaus(tiedosto, henkilo_id, pituus, paino)
         except:
             print('Tietokantaan tallennuksessa tapahtui virhe')
-
+        
+        # Kysytään halutaanko jatkaa mittaustulosten syöttämistä
         lisaa_mittauksia = input('Lisätäänkö uusia mittaustuloksia? K/e ')
         if lisaa_mittauksia.upper() == 'E':
             break
@@ -57,9 +59,10 @@ while True:
             lisaa_mittauksia = 'K'
 
     # Silmukka olioiden luomiseen ja tulosten näyttämiseen
-    lisaa_tuloksia = input('Lasketaanko uusia tuloksia? K/e')
+    lisaa_tuloksia = input('Lasketaanko uusia tuloksia? K/e ')
     while lisaa_tuloksia.upper() == 'K':
         henkilo_id = input('Anna henkilön id: ')
+        
         # Haetaan henkilö- ja mittaustietodot tietokannan henkilon_viimeiset_tiedot-näkymästä
         tapahtui_virhe = False
         try:
@@ -75,6 +78,8 @@ while True:
             pituus = tietue[0][4]
             paino =  tietue[0][5]
             ika = round(tietue[0][6])
+            
+        # Valitaan luodaanko aikuinen- tai lapsi-olio ja tulostetaan painoindeksi ja kehon rasvaprosentti  
         if ika < 18:
             lapsi = luokat.Lapsi(etunimi, sukunimi, pituus, paino, ika, sukupuoli)
             print('Painoindenksi on:', lapsi.painoindeksi())
@@ -85,7 +90,7 @@ while True:
             print('Painoindenksi on:', aikuinen.painoindeksi())
             print('Kehon rasvaprosentti on:', aikuinen.rasvaprosentti())
 
-
+        # Kysytään halutaanko halutaanko lisää tuloksia
         lisaa_tuloksia = input('Lasketaanko uusia tuloksia? K/e ')
         if lisaa_tuloksia.upper() == 'E':
             break
