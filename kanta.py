@@ -179,8 +179,8 @@ if __name__ == "__main__":
 
     # lisaa_mittaus(tietokannan_nimi, 2, 171, 74)
 
-    tulosjoukko = lue_kaikki(tietokannan_nimi, 'henkilo')
-    print(tulosjoukko)
+    # tulosjoukko = lue_kaikki(tietokannan_nimi, 'henkilo')
+    # print(tulosjoukko)
     
     # Testatan näkymän henkilon_viimeiset_tiedot toimintaa
     henkilon_tiedot = lue_viimeiset_tiedot(tietokannan_nimi, 2)
